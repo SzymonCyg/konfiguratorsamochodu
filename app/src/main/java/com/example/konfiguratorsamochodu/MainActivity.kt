@@ -1,7 +1,10 @@
 package com.example.konfiguratorsamochodu
 
 import android.os.Bundle
+import android.widget.Button
 import android.widget.CheckBox
+import android.widget.ImageView
+import android.widget.RadioGroup
 import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
@@ -18,53 +21,33 @@ class MainActivity : AppCompatActivity() {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
+        val myRadioGroup=findViewById<RadioGroup>(R.id.auto_radiobutton)
+        val podgrzewaneSiedzeniabox=findViewById<CheckBox>(R.id.podgrzewane_siedzenia)
+        val klimatyzacjabox=findViewById<CheckBox>(R.id.klimatyzacja)
+        val szyberdachbox=findViewById<CheckBox>(R.id.szyberdach)
+        val skorzanaTapicerkabox=findViewById<CheckBox>(R.id.skorzana_tapicerka)
+        val automatycznaSkrzyniabox=findViewById<CheckBox>(R.id.automatyczna_skrzynia)
+        val confirm_button=findViewById<Button>(R.id.confirm_button)
+        val obrazek=findViewById<ImageView>(R.id.auto_obrazek)
         val myTextView=findViewById<TextView>(R.id.podsumowanie)
 
-        val Podgrzewane_siedzenia:CheckBox = findViewById(R.id.podgrzewane_siedzenia)
-        Podgrzewane_siedzenia.setOnCheckedChangeListener{ _, isChecked->
-            if(isChecked){
-                myTextView.text="Podgrzewane siedzenia"
-            }
-            else{
-
+        myRadioGroup.setOnCheckedChangeListener{_, checkedId->
+            when(checkedId){
+                R.id.suv_radiobutton->obrazek.setImageResource(R.drawable.suv)
+                R.id.sedan_radiobutton->obrazek.setImageResource(R.drawable.sedan)
+                R.id.hatchback->obrazek.setImageResource(R.drawable.hatchback)
             }
         }
-        val Klimatyzacja: CheckBox = findViewById(R.id.klimatyzacja)
-        Klimatyzacja.setOnCheckedChangeListener{ _, isChecked->
-            if(isChecked){
-                myTextView.text="Klimatyzacja"
-            }
-            else{
 
-            }
+        confirm_button.setOnClickListener{
+            val podgrzewaneSiedzenia= if (podgrzewaneSiedzeniabox.isChecked)"Podgrzewane siedzenia, " else ""
+            val klimatyzacja= if (klimatyzacjabox.isChecked)"Klimatyzacja, " else ""
+            val szyberDach= if (szyberdachbox.isChecked)"Szyber dach, " else ""
+            val skorzanatapicerka= if (skorzanaTapicerkabox.isChecked)"Skórzana tapicerka, " else ""
+            val automat= if (automatycznaSkrzyniabox.isChecked)"Automatyczna skrzynia biegów, " else ""
+            myTextView.text="Dodatkowe opcje wyposażenia:$podgrzewaneSiedzenia$klimatyzacja$szyberDach$skorzanatapicerka$automat"
         }
-        val Szyberdach: CheckBox = findViewById(R.id.szyberdach)
-        Szyberdach.setOnCheckedChangeListener{ _, isChecked->
-            if(isChecked){
-                myTextView.text="Szyberdach"
-            }
-            else{
 
-            }
-        }
-        val Skorzana_tapicerka: CheckBox = findViewById(R.id.skorzana_tapicerka)
-        Skorzana_tapicerka.setOnCheckedChangeListener{ _, isChecked->
-            if(isChecked){
-                myTextView.text="Skorzana_tapicerka"
-            }
-            else{
-
-            }
-        }
-        val Automatyczna_skrzynia: CheckBox = findViewById(R.id.automatyczna_skrzynia)
-        Automatyczna_skrzynia.setOnCheckedChangeListener{ _, isChecked->
-            if(isChecked){
-                myTextView.text="Automatyczna_skrzynia"
-            }
-            else{
-
-            }
-        }
 
     }
 }
