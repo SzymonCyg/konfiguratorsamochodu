@@ -31,21 +31,20 @@ class MainActivity : AppCompatActivity() {
         val obrazek=findViewById<ImageView>(R.id.auto_obrazek)
         val myTextView=findViewById<TextView>(R.id.podsumowanie)
 
-        myRadioGroup.setOnCheckedChangeListener{_, checkedId->
-            when(checkedId){
+
+        confirm_button.setOnClickListener{
+            val car= when(myRadioGroup.checkedRadioButtonId){
                 R.id.suv_radiobutton->obrazek.setImageResource(R.drawable.suv)
                 R.id.sedan_radiobutton->obrazek.setImageResource(R.drawable.sedan)
                 R.id.hatchback->obrazek.setImageResource(R.drawable.hatchback)
+                else->"Nie wybrano modelu"
             }
-        }
-
-        confirm_button.setOnClickListener{
-            val podgrzewaneSiedzenia= if (podgrzewaneSiedzeniabox.isChecked)"Podgrzewane siedzenia, " else ""
-            val klimatyzacja= if (klimatyzacjabox.isChecked)"Klimatyzacja, " else ""
-            val szyberDach= if (szyberdachbox.isChecked)"Szyber dach, " else ""
-            val skorzanatapicerka= if (skorzanaTapicerkabox.isChecked)"Skórzana tapicerka, " else ""
-            val automat= if (automatycznaSkrzyniabox.isChecked)"Automatyczna skrzynia biegów, " else ""
-            myTextView.text="Dodatkowe opcje wyposażenia:$podgrzewaneSiedzenia$klimatyzacja$szyberDach$skorzanatapicerka$automat"
+            val podgrzewaneSiedzenia= if (podgrzewaneSiedzeniabox.isChecked)"-Podgrzewane siedzenia\n" else ""
+            val klimatyzacja= if (klimatyzacjabox.isChecked)"-Klimatyzacja\n" else ""
+            val szyberDach= if (szyberdachbox.isChecked)"-Szyber dach\n" else ""
+            val skorzanatapicerka= if (skorzanaTapicerkabox.isChecked)"-Skórzana tapicerka\n" else ""
+            val automat= if (automatycznaSkrzyniabox.isChecked)"-Automatyczna skrzynia biegów\n" else ""
+            myTextView.text="Dodatkowe opcje wyposażenia:\n$podgrzewaneSiedzenia$klimatyzacja$szyberDach$skorzanatapicerka$automat"
         }
 
 
